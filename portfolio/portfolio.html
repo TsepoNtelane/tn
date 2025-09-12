@@ -90,7 +90,7 @@
     <div class="col-lg-4 col-md-6 mb-3">
       <div class="portfolio-box" data-bs-toggle="modal" data-bs-target="#portfolioModal" data-full="../assets/img/projects.png">
         <img src="../assets/img/portback/6.png">
-        <div class="overlay"><h4>Projects</h4></div>
+        <div class="overlay"><h4>Projects timeline</h4></div>
       </div>
     </div>
 
@@ -158,8 +158,187 @@
     document.getElementById('modalImage').src = fullSrc;
   });
 </script>
+<div style="text-align: center;">
+  <p style="color:red">
+    Logos displayed are the property of their respective organizations and are shown here for illustrative purposes only. This work was conducted in a professional capacity under official programs and does not imply endorsement or ongoing affiliation.
+  </p>
+</div>
 
 </section>
+
+<!-- Page Content-->
+        <section id="featured-gallery" class="container my-5 text-center">
+          <h3 class="mb-4" style="color: Grey;">Featured walk-through</h3>
+  <!-- Featured Image -->
+  <div class="mb-3">
+  <img id="featuredImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Lesotho_w1_locator.svg/640px-Lesotho_w1_locator.svg.png" 
+       class="img-fluid rounded shadow-sm" 
+       alt="Featured Project" 
+       style="width: 800px; height: 300px; object-fit: cover;">
+</div>
+
+  <!-- Featured Text -->
+  <div class="mb-4">
+    <h3 style="color: Grey" id="featuredTitle">Africa Vaccination Week</h3>
+    <p id="featuredText" style="color: Grey">
+      Africa Vaccination Week raises awareness, promotes immunization, and drives action to protect communities across Africa.
+    </p>
+  </div>
+
+  <!-- Thumbnail Gallery -->
+  <div style="overflow-x: auto; white-space: nowrap; padding: 1rem 0;">
+    <div style="display: inline-flex; gap: 1rem; justify-content: center;">
+      <img src="../assets/img/featthumb/1.png" 
+           class="thumb img-fluid rounded shadow-sm" 
+           data-full="../assets/img/challenge.png"
+           data-title="Challenge"
+           data-text="Vaccination teams lack a seamless, real-time system to capture, store, and visualize data for timely decision-making and transparency.">
+
+      <img src="../assets/img/featthumb/2.png" 
+           class="thumb img-fluid rounded shadow-sm" 
+           data-full="../assets/img/avwprocess.png"
+           data-title="The process"
+           data-text="Crews send SMS → stored in Infobip → Power Automate pulls to SQL → modeled in Power BI → dashboards published online.">
+
+      <img src="../assets/img/featthumb/3.png" 
+           class="thumb img-fluid rounded shadow-sm" 
+           data-full="../assets/img/pipeline.png"
+           data-title="Data pipeline"
+           data-text="Preserving fast-changing field data with overwrite risk using dual-layer cleaning-first for integrity, then structure.">
+
+      <img src="../assets/img/featthumb/4.png" 
+           class="thumb img-fluid rounded shadow-sm" 
+           data-full="../assets/img/transformations.png"
+           data-title="Transformations"
+           data-text="Raw data is cleaned, deduplicated, reshaped, and visualized, turning field inputs into clear, actionable insights.">
+
+      <img src="../assets/img/featthumb/5.png" 
+           class="thumb img-fluid rounded shadow-sm" 
+           data-full="../assets/img/datamodel.png"
+           data-title="Data model"
+           data-text="Data links locations, submissions, and user details. Clean, traceable and structured insights.">
+
+      <img src="../assets/img/featthumb/6.png" 
+           class="thumb img-fluid rounded shadow-sm" 
+           data-full="../assets/img/avw.png"
+           data-title="The solution"
+           data-text="Maseru led, Quthing lagged. Albendazole & Tetanus vaccines dominated. Data shows strong urban reach, gaps in remote districts.">
+    </div>
+  </div>
+  
+</section>
+
+<!-- JavaScript to handle thumbnail clicks -->
+<script>
+  document.querySelectorAll(".thumb").forEach(thumb => {
+    thumb.addEventListener("click", () => {
+      document.getElementById("featuredImage").src = thumb.dataset.full;
+      document.getElementById("featuredTitle").textContent = thumb.dataset.title;
+      document.getElementById("featuredText").textContent = thumb.dataset.text;
+    });
+  });
+</script>
+
+<!-- CSS for hover effect -->
+<style>
+  .thumb {
+    max-height: 100px;
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  .thumb:hover {
+    transform: scale(1.05);
+  }
+</style>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="portfolioModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark">
+      <div class="modal-body p-0">
+        <img src="" class="img-fluid w-100" id="modalImage">
+      </div>
+      <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Change modal image when thumbnail clicked
+  //const portfolioModal = document.getElementById('portfolioModal');
+  portfolioModal.addEventListener('show.bs.modal', function (event) {
+    const img = event.relatedTarget;
+    const fullSrc = img.getAttribute('data-full');
+    const modalImage = portfolioModal.querySelector('#modalImage');
+    modalImage.src = fullSrc;
+  });
+</script>
+
+
+<!-- Modal -->
+<div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); align-items:center; justify-content:center; z-index:1000;">
+  <span style="position:absolute; top:20px; right:30px; font-size:40px; cursor:pointer; color:white;" onclick="closeModal()">&times;</span>
+  <img id="modalImg" style="max-width:90%; max-height:90%; margin:auto; display:block;">
+</div>
+
+<script>
+  function openModal(src) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImg');
+    modalImg.src = src;
+    modal.style.display = 'flex';
+    modal.style.flexDirection = 'column';
+  }
+
+  function closeModal() {
+    document.getElementById('imageModal').style.display = 'none';
+  }
+</script>
+
+
+<!-- Modal for larger image view -->
+<div class="modal fade" id="imageModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark">
+      <div class="modal-body p-0">
+        <img src="" class="img-fluid w-100" id="modalImage">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Handle image click to open modal
+  document.querySelectorAll('.portfolio-box img').forEach(img => {
+    img.addEventListener('click', function () {
+      document.getElementById('modalImage').src = this.src;
+      new bootstrap.Modal(document.getElementById('imageModal')).show();
+    });
+  });
+</script>
+
+<style>
+  .portfolio-box {
+    height: 300px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .portfolio-box img {
+    transition: transform 0.4s ease;
+  }
+  .portfolio-box:hover img {
+    transform: scale(1.1);
+  }
+  .overlay {
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .portfolio-box:hover .overlay {
+    opacity: 1;
+  }
+</style>
+
 
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="portfolioModal" tabindex="-1">
